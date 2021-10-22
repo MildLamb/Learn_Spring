@@ -45,3 +45,39 @@ public class UserServiceImpl implements UserService {
 没有IOC的程序中，我们使用面向对象编程，对象的创建与对象间的依赖关系完全硬编码在程序中，  
 对象的创建由程序自己控制，控制反转后对象的创建交给了第三方。  
 
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        没有IOC：
+            类型 变量名 = new 类型();
+          Hello hello = new Hello();
+
+          SpringBean:
+            id = 变量名
+           class = new 的对象
+         properties = 给对象的属性设置一个值
+    -->
+
+    <bean id="hello" class="com.mildlamb.pojo.Hello">
+        <property name="str" value="HelloSpring"></property>
+    </bean>
+
+    <!-- 改造 -->
+    <bean id="userDaoImpl" class="com.mildlamb.dao.Impl.UserDaoImpl"></bean>
+    <bean id="mysqlDaoImpl" class="com.mildlamb.dao.Impl.MysqlUserDaoImpl"></bean>
+
+    <!-- ref:引用spring中创建好的对象
+        value：具体的值，基本数据类型
+     -->
+    <bean id="userService" class="com.mildlamb.service.Impl.UserServiceImpl">
+        <property name="userDao" ref="mysqlDaoImpl"></property>
+    </bean>
+
+</beans>
+```
+要实现不同的操作，只需要在xml配置文件中进行修改，我们不需要再到程序中进行改动了，对象由Spring创建，管理，装配。

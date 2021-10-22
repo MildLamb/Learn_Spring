@@ -102,7 +102,7 @@ public class Champion {
 </beans>
 ```
 
-### c命名空间和p命名空间注入
+### c命名空间(对应construct-arg构造器注入)和p命名空间(对应properties的set注入)注入
 - 导入p命名空间约束 xmlns:p="http://www.springframework.org/schema/p"
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -116,6 +116,11 @@ public class Champion {
         可以直接注入属性的值
      -->
     <bean id="user" class="com.mildlamb.pojo.User" p:name="QSJ" p:age="24"></bean>
+        
+        <!-- c命名空间注入
+        通过构造器进行注入
+     -->
+    <bean id="user2" class="com.mildlamb.pojo.User" c:age="24" c:name="qsj"></bean>
 
 </beans>
 ```

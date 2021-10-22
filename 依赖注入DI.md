@@ -104,11 +104,13 @@ public class Champion {
 
 ### c命名空间(对应construct-arg构造器注入)和p命名空间(对应properties的set注入)注入
 - 导入p命名空间约束 xmlns:p="http://www.springframework.org/schema/p"
+- 导入c命名空间约束 xmlns:c="http://www.springframework.org/schema/c"
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
@@ -123,4 +125,25 @@ public class Champion {
     <bean id="user2" class="com.mildlamb.pojo.User" c:age="24" c:name="qsj"></bean>
 
 </beans>
+```
+- 测试类
+```java
+public class MyTest {
+    @Test
+    public void test(){
+        ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+        Champion champion = ac.getBean("champion", Champion.class);
+        System.out.println(champion);
+    }
+
+    @Test
+    public void test2(){
+        ApplicationContext ac = new ClassPathXmlApplicationContext("classpath:userBean.xml");
+        //p命名空间测试
+//        User user = ac.getBean("user", User.class);
+        //c命名空间测试
+        User user2 = ac.getBean("user2", User.class);
+        System.out.println(user2);
+    }
+}
 ```

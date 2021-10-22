@@ -113,12 +113,12 @@ public class Champion {
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- p命名空间注入
-        可以直接注入属性的值
+        可以直接注入属性的值，要求有对应属性的setter方法
      -->
     <bean id="user" class="com.mildlamb.pojo.User" p:name="QSJ" p:age="24"></bean>
         
         <!-- c命名空间注入
-        通过构造器进行注入
+        通过构造器进行注入，要求有对应的有参构造器
      -->
     <bean id="user2" class="com.mildlamb.pojo.User" c:age="24" c:name="qsj"></bean>
 

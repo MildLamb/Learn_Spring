@@ -83,6 +83,7 @@ public class UserServiceImpl implements UserService {
 要实现不同的操作，只需要在xml配置文件中进行修改，我们不需要再到程序中进行改动了，对象由Spring创建，管理，装配。
 
 ### IOC创建对象的方式
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -100,10 +101,9 @@ public class UserServiceImpl implements UserService {
         <constructor-arg name="name" value="镜爪"></constructor-arg>
     </bean>
   
-  
-    <!-- ============================================== -->
-  
-      <!-- 实例工厂方法创建对象 -->
+      <!-- ============================================== -->
+
+    <!-- 实例工厂方法创建对象 -->
     <bean id="user2" class="com.mildlamb.pojo.User2">
         <property name="user" ref="myNeedFactory"></property>
     </bean>
@@ -113,13 +113,14 @@ public class UserServiceImpl implements UserService {
     <!-- 我需要的工厂的信息，也就是上面的工厂  factory-bean：这个工厂是谁  factory-method：生产对象的方法是哪一个 -->
     <bean id="myNeedFactory" factory-bean="userFactory" factory-method="getUser"></bean>
 
-    <!-- ============================================== -->
+      <!-- ============================================== -->
 
     <!-- 静态工厂方法创建对象 -->
     <bean id="user2" class="com.mildlamb.pojo.User2">
         <property name="user" ref="myNeedFactory"></property>
     </bean>
-    
+
     <!-- 我需要的工厂的信息，也就是上面的工厂  class：这个静态工厂是谁  factory-method：生产对象的方法是哪一个 -->
     <bean id="myNeedFactory" class="com.mildlamb.factory.UserFactory2" factory-method="getUser"></bean>
 </beans>
+```

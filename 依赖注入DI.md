@@ -11,7 +11,7 @@
 ```
 
 ### Set方式注入
-测试要注入的对象
+- 测试要注入的对象
 ```java
 @Data
 @AllArgsConstructor
@@ -27,7 +27,7 @@ public class Champion {
     private String wife;
 }
 ```
-bean的注入,applicationContext.xml
+- bean的注入,applicationContext.xml
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -99,5 +99,23 @@ bean的注入,applicationContext.xml
             </props>
         </property>
     </bean>
+</beans>
+```
+
+### c命名空间和p命名空间注入
+- 导入p命名空间约束 xmlns:p="http://www.springframework.org/schema/p"
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- p命名空间注入
+        可以直接注入属性的值
+     -->
+    <bean id="user" class="com.mildlamb.pojo.User" p:name="QSJ" p:age="24"></bean>
+
 </beans>
 ```

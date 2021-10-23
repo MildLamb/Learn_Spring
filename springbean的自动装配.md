@@ -71,10 +71,13 @@
 - pojo类中选择需要注入的属性添加@Autowired注解
 
 **实体类**  
+```bash
 @Autowired默认按照类型注入  
 required属性表示该属性是否一定需要注入，false表示允许不注入该属性  
 @Qualifier：当注入的bean类型存在多个，通过@Qualifier指定明确的beanid  
+
 或者使用@Resource(name = "beanid")，@Resource默认使用byName注入  
+```
 ```java
 public class User {
     private String name;

@@ -101,6 +101,7 @@ public class User {
 //配置类
 @Configuration
 @ComponentScan("com.mildlamb")
+@Import(MySpringConfig2.class)
 public class MySpringConfig {
 
     //注册一个bean，相当于<bean>

@@ -64,3 +64,62 @@ xml与注解：
     <!-- 开启spring注解支持 -->
     <context:annotation-config></context:annotation-config>
 ```
+
+## 完全注解开发,使用java的方式配置spring
+我们将不使用spring的xml配置了，全权交给java来做  
+javaConfig是spring的一个子项目，在spring4之后，成为了一个核心功能  
+```bash
+@Configuration: 标注为配置类
+@Bean: 将方法的返回值注册到spring容器中
+AnnotationConfigApplicationContext: 使用java配置类方式，将使用该实现类获取ioc容器
+```
+- pojo类
+```java
+@Component
+public class User {
+    @Value("Gnar")
+    private String name;
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                '}';
+    }
+}
+```
+- 配置类
+```java
+//配置类
+@Configuration
+@ComponentScan("com.mildlamb")
+public class MySpringConfig {
+
+    //注册一个bean，相当于<bean>
+    //方法的名字，相当于bean的id属性
+    //方法的返回值，相当于bean的class属性
+    @Bean(value = "EngulfMissing")
+    public User getUser(){
+        return new User();
+    }
+}
+```
+- 测试
+```java
+@Test
+    public void test(){
+        //如果完全使用配置类方式实现spring，我们就要通过AnnotationConfigApplicationContext容器
+        ApplicationContext ac = new AnnotationConfigApplicationContext(MySpringConfig.class);
+        User user = ac.getBean("EngulfMissing", User.class);
+        System.out.println(user.getName());
+    }
+```
+

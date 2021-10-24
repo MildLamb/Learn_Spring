@@ -55,3 +55,12 @@ xml与注解：
 实际开发中：  
   - bean由xml来管理
   - 属性由注解注入
+
+注意点：  
+想让注解生效，就要开启注解支持
+```xml
+    <!-- 指定要扫描的包，这个包下的注解就会生效 -->
+    <context:component-scan base-package="com.mildlamb"></context:component-scan>
+    <!-- 开启spring注解支持 -->
+    <context:annotation-config></context:annotation-config>
+```

@@ -29,7 +29,7 @@ AOP(Aspect Oriented Programming，面向切面编程),通过预编译方式和�
     <version>1.9.6</version>
 </dependency>
 ```
-方式一: 使用spring的API接口  
+**方式一: 使用spring的API接口  **
 - 业务类
 ```java
 public class UserServiceImpl implements UserService {
@@ -110,4 +110,35 @@ public void test(){
     UserService userService = ac.getBean("userService", UserService.class);
     userService.add();
 }
+```
+**方式二: 使用自定义类(切面)  **
+- 切面
+```java
+//切面
+public class DiyAspect {
+
+    public void before_Method(){
+        System.out.println("=============方法执行前=============");
+    }
+
+    public void after_Method(){
+        System.out.println("=============方法执行后=============");
+    }
+}
+```
+- application.xml
+```xml
+<!-- 方式二：自定义类 -->
+    <bean id="diyAspect" class="com.mildlamb.diy.DiyAspect"></bean>
+    <!-- 配置AOP -->
+    <aop:config>
+        <!-- 配置切面,引用自定义的切面 -->
+        <aop:aspect ref="diyAspect">
+            <!-- 配置切入点 -->
+            <aop:pointcut id="pointcut" expression="execution(* com.mildlamb.service.impl.*.*(..))"/>
+            <!-- 配置通知 -->
+            <aop:before method="before_Method" pointcut-ref="pointcut"></aop:before>
+            <aop:after-returning method="after_Method" pointcut-ref="pointcut"></aop:after-returning>
+        </aop:aspect>
+    </aop:config>
 ```

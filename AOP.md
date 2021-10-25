@@ -29,7 +29,8 @@ AOP(Aspect Oriented Programming，面向切面编程),通过预编译方式和�
     <version>1.9.6</version>
 </dependency>
 ```
-**方式一: 使用spring的API接口  **
+**方式一: 使用spring的API接口**  
+
 - 业务类
 ```java
 public class UserServiceImpl implements UserService {
@@ -111,7 +112,8 @@ public void test(){
     userService.add();
 }
 ```
-**方式二: 使用自定义类(切面)  **
+**方式二: 使用自定义类(切面)**
+
 - 切面
 ```java
 //切面

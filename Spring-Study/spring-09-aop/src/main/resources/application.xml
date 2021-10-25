@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:component-scan base-package="com.mildlamb"></context:component-scan>
+    <context:annotation-config></context:annotation-config>
+
+
+    <!-- 注册bean -->
+    <bean id="userService" class="com.mildlamb.service.impl.UserServiceImpl"></bean>
+    <bean id="before_log" class="com.mildlamb.log.BeforeLog"></bean>
+    <bean id="after_log" class="com.mildlamb.log.AfterLog"></bean>
+
+
+    <!-- 方式一：使用原生spring API接口 -->
+
+<!--    &lt;!&ndash; 配置aop:需要导入aop的约束 &ndash;&gt;-->
+<!--    <aop:config>-->
+<!--        &lt;!&ndash; 切入点  expression:表达式 execution(要执行的位置) 修饰符 返回值 包名.类名.方法名(参数列表)&ndash;&gt;-->
+<!--        <aop:pointcut id="pointcut" expression="execution(* com.mildlamb.service.impl.*.*(..))"/>-->
+
+<!--        &lt;!&ndash; 执行环绕增加 &ndash;&gt;-->
+<!--        <aop:advisor advice-ref="after_log" pointcut-ref="pointcut"></aop:advisor>-->
+<!--        <aop:advisor advice-ref="before_log" pointcut-ref="pointcut"></aop:advisor>-->
+
+<!--    </aop:config>-->
+
+<!--    &lt;!&ndash; 方式二：自定义类 &ndash;&gt;-->
+<!--    <bean id="diyAspect" class="com.mildlamb.diy.DiyAspect"></bean>-->
+<!--    &lt;!&ndash; 配置AOP &ndash;&gt;-->
+<!--    <aop:config>-->
+<!--        &lt;!&ndash; 配置切面,引用自定义的切面 &ndash;&gt;-->
+<!--        <aop:aspect ref="diyAspect">-->
+<!--            &lt;!&ndash; 配置切入点 &ndash;&gt;-->
+<!--            <aop:pointcut id="pointcut" expression="execution(* com.mildlamb.service.impl.*.*(..))"/>-->
+<!--            <aop:before method="before_Method" pointcut-ref="pointcut"></aop:before>-->
+<!--            <aop:after-returning method="after_Method" pointcut-ref="pointcut"></aop:after-returning>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+    <!-- 第三种：使用注解配置切面 -->
+<!--    <bean id="annoAspect" class="com.mildlamb.diy.AnnoAspect"></bean>-->
+    <!-- 开启spring aop注解的支持 -->
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+</beans>

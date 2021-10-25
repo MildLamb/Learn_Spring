@@ -144,15 +144,17 @@ public class DiyAspect {
         </aop:aspect>
     </aop:config>
 ```
-**方式二: 使用注解定义切面**
+**方式三: 使用注解定义切面**
 ```java
 @Aspect //标注这个类是一个切面
 @Component
 public class AnnoAspect {
 
+    //提取公共的切入点
     @Pointcut("execution(* com.mildlamb.service.impl.*.*(..))")
     private void pt(){}
 
+    //使用公共的切入点
     @Before("pt()")
     public void method_Before(){
         System.out.println("=========Before=========");

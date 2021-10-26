@@ -190,3 +190,22 @@ public class UserMapperImpl implements UserMapper {
         }
     }
 ```
+**方式二：SqlSessionDaoSupport**
+```java
+//继承SqlSessionDaoSupport，通过getSqlSession()获取SqlSession
+public class UserMapperImpl2 extends SqlSessionDaoSupport implements UserMapper{
+    public List<User> selectUsers() {
+        SqlSession sqlSession = getSqlSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        return userMapper.selectUsers();
+    }
+}
+```
+application.xml
+```xml
+<!-- 方式二：继承SqlSessionDaoSupport -->
+    <bean id="userMapperImpl2" class="com.mildlamb.mapper.UserMapperImpl2">
+        <!-- 注入SqlSessionFactory -->
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
+```

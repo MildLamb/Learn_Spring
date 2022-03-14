@@ -34,14 +34,14 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>5.3.11</version>
+            <version>5.3.14</version>
         </dependency>
 
         <!-- spring操作数据库的话，还需要一个spring-jdbc -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>5.3.11</version>
+            <version>5.3.14</version>
         </dependency>
         <!-- AOP -->
         <dependency>
